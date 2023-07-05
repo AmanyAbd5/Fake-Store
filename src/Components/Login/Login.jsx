@@ -8,17 +8,17 @@ export default function Login(props) {
 
   // let [errors,setError]= useState([]);
   let [statuseErrors,setstatuseErrors]= useState([]);
-  let [statuseErrorsemail,setstatuseErrorsemail]= useState('');
+  let [statuseErrorsusername,setstatuseErrorsusername]= useState('');
   let navigate =useNavigate();
   
   const schema =Yup.object({
-    email:Yup.string().required("email is required").email('not valid email'),
+    username:Yup.string().required("username is required"),
     password:Yup.string().required("password is required"),
-  })
+  }) 
 
   let formik=useFormik({
     initialValues:{
-      email:'',
+      username:'',
       password:'',
     },validationSchema:schema,
     onSubmit:sendLoginData,
@@ -28,16 +28,16 @@ export default function Login(props) {
    async function sendLoginData(values){
     console.log("jjjjjjjjjjjjjjjjj555555555jj");
       
-      let response= await axios.post("https://king-prawn-app-3mgea.ondigitalocean.app/auth/login",values)
+      let response= await axios.post("https://fakestoreapi.com/auth/login",values)
       .catch((err)=>{
         console.log(err.response.data);
         console.log(err.response.data.validationErr);
 
-        if(err.response.data.message=='Email exist'){
+        if(err.response.data.message=='username exist'){
           // console.log("yes 22222");
-          setstatuseErrorsemail(err.response.data.message);
+          setstatuseErrorsusername(err.response.data.message);
         }
-        else setstatuseErrorsemail('');
+        else setstatuseErrorsusername('');
         if(err.response.data.validationErr){
           // console.log("no 11111111111");
           setstatuseErrors(err.response.data.validationErr);
@@ -49,7 +49,7 @@ export default function Login(props) {
       console.log(response.data);
       if(response.data.message=='Done'){
         setstatuseErrors([]);
-        setstatuseErrorsemail('');
+        setstatuseErrorsusername('');
         localStorage.setItem("userToken",response.data.access_token);
         props.info();
         navigate('/cart');
@@ -73,7 +73,7 @@ export default function Login(props) {
         return <div className='text-danger'>{err.message}</div>
       })}
 
-     <div className="text-danger">{statuseErrorsemail}</div>
+     <div className="text-danger">{statuseErrorsusername}</div>
 
 
       {/* {errors.map((err)=>{ 
@@ -83,13 +83,13 @@ export default function Login(props) {
       <form onSubmit={formik.handleSubmit}>
         
  
-          <label htmlFor='email'>Email</label>
-          <input type='email' name='email' className='form-control my-3' id='email' 
-          value={formik.values.email}
+          <label htmlFor='username'>username</label>
+          <input type='username' name='username' className='form-control my-3' id='username' 
+          value={formik.values.username}
           onChange={formik.handleChange} ></input>
          
-         {/* <p className='text-danger'>{formik.errors.email} </p> */}
-         {formik.errors.email ? <p className='alert alert-danger'>{formik.errors.email} </p>:''}
+         {/* <p className='text-danger'>{formik.errors.username} </p> */}
+         {formik.errors.username ? <p className='alert alert-danger'>{formik.errors.username} </p>:''}
 
 
           <label htmlFor='password'>Password</label>
