@@ -9,6 +9,7 @@ import jwt from 'jwt-decode';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Cart from './Components/Cart/Cart';
 import ProtectedRouter from './Components/ProtectedRouter/ProtectedRouter';
+import ProductDetails from './Components/ProductDetails/ProductDetails';
 
 export default function App() {
   let [user,setUser]=useState(null);
@@ -27,6 +28,7 @@ export default function App() {
       children:[
         {index:true,element:<Home />},
         {path:'products',element:<Products />},
+        {path:'products/:id',element:<ProductDetails />},
         {path:'cart',element:<ProtectedRouter><Cart /></ProtectedRouter>},
         {path:'register',element:<Register />},
         {path:'login',element:<Login info={saveCurrentUser}/>},
