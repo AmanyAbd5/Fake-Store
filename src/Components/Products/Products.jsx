@@ -24,7 +24,7 @@ export default function Products() {
     <div className="row">
        {products.map((product)=>
           <div className="col-md-4" key={product._id}>
-            <Link to={`${product._id}`}>
+            <Link to={`/products/${product.slug}`} state={{id:product._id}}>
             <img src={product.mainImage.secure_url} alt={product.name} className='w-100' />
             <p>{product.name}</p>
             </Link>

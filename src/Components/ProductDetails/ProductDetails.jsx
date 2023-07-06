@@ -1,14 +1,16 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams , useLocation} from 'react-router-dom';
 export default function ProductDetails() {
 
-    let { id } = useParams();
+    // let { id } = useParams();
 
     let[product,setProduct]= useState({});
     let[imges,setImges]= useState([]);
-
+    const location=useLocation();
+    console.log(location);
+    let {id}=location.state;
 
     async function getProduct(id){
        let {data}=await axios.get(`https://king-prawn-app-3mgea.ondigitalocean.app/product/${id}`);
@@ -27,9 +29,6 @@ export default function ProductDetails() {
     <div>ProductDetails</div>
     <div>{product.name}</div>
 
-    {/* {product ? <img src={product.mainImage.secure_url} alt={product.name}  />:''  } */}
-    
-    
     <div className="row">
     {imges.map((imgs)=>
     <div className="col-md-3 ">

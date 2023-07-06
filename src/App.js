@@ -28,7 +28,7 @@ export default function App() {
       children:[
         {index:true,element:<Home />},
         {path:'products',element:<Products />},
-        {path:'products/:id',element:<ProductDetails />},
+        {path:'products/:slug',element:<ProductDetails />},
         {path:'cart',element:<ProtectedRouter><Cart /></ProtectedRouter>},
         {path:'register',element:<Register />},
         {path:'login',element:<Login info={saveCurrentUser}/>},
