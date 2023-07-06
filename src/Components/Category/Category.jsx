@@ -13,23 +13,23 @@ export default function Category() {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4
+        slidesToShow: 2,
+        slidesToScroll: 2
       };
 
     async function sendCategory(){
-        let {data}= await axios.get("https://king-prawn-app-3mgea.ondigitalocean.app/category")
-        // console.log({data});
+        let {data}= await axios.get("https://fakestoreapi.com/products/categories")
+        console.log(data);
         // console.log(data.category);
         // console.log(data.category[0].name);
-        setCategory(data.category);
+        setCategory(data);
   
       }
 
-      async function getSubCategory(id){
-        let {data}= await axios.get(`https://king-prawn-app-3mgea.ondigitalocean.app/category/${id}/subcategory`)
-        console.log(data.subcategory);
-        setSubCategory(data.subcategory)
+      async function getSubCategory(name){
+        let {data}= await axios.get(`https://fakestoreapi.com/products/category/${name}`)
+        console.log(data);
+        setSubCategory(data)
       }
   
     useEffect(()=>{
@@ -45,10 +45,10 @@ export default function Category() {
                   {category.map((ele)=>
                     ( 
                        <> 
-                           <div className="col-md-3">
+                           <div className="col-md-4">
                              <div className="category text-center">
-                                 <div>{ele.name} </div>
-                                 <img src={ele.image.secure_url} alt={ele.name} className={`${style.img} w-120`} onClick={()=>getSubCategory(ele.id)}/>
+                                 <div onClick={()=>getSubCategory(ele)}>{ele} </div>
+                                 {/* <img src={ele.image.secure_url} alt={ele.name} className={`${style.img} w-120`} onClick={()=>getSubCategory(ele.id)}/> */}
                             </div>
                           </div>
                        </>
@@ -62,8 +62,14 @@ export default function Category() {
                   <> 
                   <div className="col-md-3">
                     <div className="sub-category">
-                        <p> {subcategory.name}</p>
-                        <img src={subcategory.image.secure_url} alt={subcategory.name} className={`${style.imgSub} w-100`} />
+        <div className="card h-100">
+
+                        <img src={subcategory.image} alt={subcategory.name} className={`${style.imgSub} w-100`} />
+                        <p> {subcategory.title}</p>
+                        <p> {subcategory.price}</p>
+                        <p> {subcategory.category}</p>
+                        <p> {subcategory.description}</p>
+                        </div>
                    </div>
                  </div>
                   </>

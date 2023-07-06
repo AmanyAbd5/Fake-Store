@@ -29,28 +29,28 @@ export default function Login(props) {
     console.log("jjjjjjjjjjjjjjjjj555555555jj");
       
       let response= await axios.post("https://fakestoreapi.com/auth/login",values)
-      .catch((err)=>{
-        console.log(err.response.data);
-        console.log(err.response.data.validationErr);
+      // .catch((err)=>{
+      //   console.log(err.response.data);
+      //   console.log(err.response.data.validationErr);
 
-        if(err.response.data.message=='username exist'){
-          // console.log("yes 22222");
-          setstatuseErrorsusername(err.response.data.message);
-        }
-        else setstatuseErrorsusername('');
-        if(err.response.data.validationErr){
-          // console.log("no 11111111111");
-          setstatuseErrors(err.response.data.validationErr);
-        }
-        else  setstatuseErrors([]);
-      })
-      console.log("ttttt");
+      //   if(err.response.data.message=='username exist'){
+      //     // console.log("yes 22222");
+      //     setstatuseErrorsusername(err.response.data.message);
+      //   }
+      //   else setstatuseErrorsusername('');
+      //   if(err.response.data.validationErr){
+      //     // console.log("no 11111111111");
+      //     setstatuseErrors(err.response.data.validationErr);
+      //   }
+      //   else  setstatuseErrors([]);
+      // })
+      // console.log("ttttt");
 
       console.log(response.data);
-      if(response.data.message=='Done'){
-        setstatuseErrors([]);
-        setstatuseErrorsusername('');
-        localStorage.setItem("userToken",response.data.access_token);
+      if(response.data){
+        // setstatuseErrors([]);
+        // setstatuseErrorsusername('');
+        localStorage.setItem("userToken",response.data.token);
         props.info();
         navigate('/cart');
         console.log("welcome");
