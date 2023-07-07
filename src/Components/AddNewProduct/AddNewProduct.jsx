@@ -29,6 +29,8 @@ export default function AddNewProduct() {
       let{data}=await axios.post("https://fakestoreapi.com/products",values);
       console.log(data);
       setproducts(data);
+      alert("done");
+      
     }
       
     async function sendCategory(){
