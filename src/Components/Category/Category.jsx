@@ -20,7 +20,6 @@ export default function Category() {
     async function sendCategory(){
         let {data}= await axios.get("https://fakestoreapi.com/products/categories")
         console.log(data);
-        // console.log(data.category);
         // console.log(data.category[0].name);
         setCategory(data);
   
